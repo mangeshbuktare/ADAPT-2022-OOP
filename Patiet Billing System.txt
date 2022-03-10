@@ -1,0 +1,278 @@
+package Inheritance;
+
+import java.util.Date;
+import java.util.*;
+import salary.SalariedEmployee;
+
+
+public class SalariedEmployee1 
+{
+
+	private double salary;
+	
+	public SalariedEmployee1()
+	{
+		salary = 0;
+	}
+	
+	public void SalariedEmployee(double salary)
+	{
+		this.salary=salary;
+	}
+	
+	//getters
+	 double getSalary()
+	{
+		return salary;
+	}
+	 //setters
+	 void setSalary(double salary)
+	 {
+		 this.salary=salary;
+	 }
+	 
+	 @Override
+	 public String toString()
+	 {
+		 return "SalariedEmployee1 [salary="+salary+ " Per Year ]";
+	 }
+
+	
+}
+
+
+class Doctor extends SalariedEmployee
+{
+	private String name;
+	private Date   date;
+	private double salary;
+	private String specialist;
+	private double fees;
+
+	public Doctor()
+	{
+		
+	}
+
+	public Doctor(String name, Date date, double salary, String specialist,double fees)
+	{
+		this.name=name;
+		this.date=date;
+		this.salary=salary;
+		this.specialist=specialist;
+		this.fees=fees;
+	}
+	
+	
+	String getName()
+	{
+		return name;
+	}
+	Date getDate()
+	{
+		return date;
+	}
+	double getSalary()
+	{
+		return salary;
+	}
+	String getSpecialist()
+	{
+		return specialist;
+	}
+	double getFees()
+	{
+		return fees;
+	}
+	
+	void setName(String name)
+	{
+		this.name=name;
+	}
+	void setDate(Date date)
+	{
+		this.date=date;
+	}
+	public void setSalary(double salary)
+	{
+		this.salary=salary;
+	}
+	void setSpecialist(String specialist)
+	{
+		this.specialist=specialist;
+	}
+	void setFees(double fees)
+	{
+		this.fees=fees;
+	}
+	
+	 public String toString()
+     {
+         return String.format("Doctor[name="+name+", date="+date+", salary="+salary+", specialist="+specialist+", fees="+fees+"]" ,getName(), getDate(), getSalary(), getSpecialist(), getFees());
+     }
+     
+     public boolean equals(Doctor other){
+         return (getSalary()==other.getSalary() && specialist.equals(other.specialist) && fees==other.fees );
+     }    
+}
+
+class Person 
+{
+	private String name;
+	public Person()
+	{
+		name = "none";
+	}
+	public Person(String theName)
+	{
+		name = theName;
+	}
+	public Person(Person theObject)
+	{
+		name = theObject.name;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String theName)
+	{
+		name = theName;
+	}
+	public String toString()
+	{
+		return name;
+	}
+	public boolean equals(Object other)
+	{
+		return name.equals(((Person)other).name);
+	}
+}
+
+class Patient extends Person
+{
+	private Doctor physician;
+	//Default constructor
+		public Patient()
+		{
+			super();
+			physician = new Doctor();
+		}
+		//Constructor with parameters
+		public Patient(String name, Doctor aDoctor)
+		{
+			super(name);
+			physician = aDoctor;
+			}
+		//method setDocotor
+		public void setDoctor(Doctor newDoctor)
+	    {
+		physician = newDoctor;
+	    }	
+		//method Doctor
+		public Doctor getPhysician()
+		{
+			return physician;
+		}
+		
+		
+		public String toString()
+		{
+			return String.format("Patient[physician=%s]", getPhysician());//super.toString() + ", Physician: " + physician.getName();
+		}
+		public boolean equals(Patient other)
+		{
+			return super.equals(other) &&
+				   physician.equals(other.physician);
+		}
+}
+
+class Billing 
+{
+	private Patient patient;
+	private Doctor physician;
+	private double dueamount;
+	//Default constructor
+		public Billing()
+		{
+			patient = new Patient();
+			physician = new Doctor();
+			dueamount = 0;
+		}
+		//Constructor with parameters
+		public Billing(Patient thePatient, Doctor thePhysician, 
+	double theDueamount)
+		{
+			patient = thePatient;
+			physician = thePhysician;
+			dueamount = theDueamount;
+		}
+		
+		
+		public Patient getPatient()
+		{
+			return patient;
+		}
+		public Doctor getPhysician()
+		{
+			return physician;
+		}
+		public double getDueAmount()
+		{
+			return dueamount;
+		}
+		
+		void setPatient(Patient newPatient)
+		{
+			patient = newPatient;
+		}
+		void setPhysician(Doctor newPhysician)
+		{
+			physician = newPhysician;
+		}
+		void setDueAmount(double newAmount)
+		{
+			dueamount = newAmount;
+		}
+		
+		
+		public String toString()
+		{
+			return "Patient: " + patient.toString() + 	", Doctor: " + physician.getSpecialist() + 
+	", Fee: Rs" + dueamount;
+		}
+		public boolean equals(Billing other)
+		{
+			return patient.equals(other.patient) &&
+				   physician.equals(other.physician) &&
+				   dueamount == other.dueamount;
+		}
+	}
+
+ 
+class PersonDemo {
+    @SuppressWarnings("deprecation")
+	public static void main(String args[]) {
+        // Take  Date code from Display 4.13 in the text book
+        // textbook
+	
+        Doctor doctor1 = new Doctor("Peter Mark", new Date(4, 30, 1995), 75000, "General Physician", 85);
+        Doctor doctor2 = new Doctor("Josh Samuel", new Date(2, 12, 1990), 88000, "Orthopedic Doctor", 190);
+        
+        Patient patient1 = new Patient("Sam Peter", doctor1);
+        Patient patient2 = new Patient("Rob Mehar", doctor2);
+        
+        Billing billing1 = new Billing(patient1, doctor1, doctor1.getFees());
+        Billing billing2 = new Billing(patient2, doctor2, doctor2.getFees());
+        
+        System.out.println("Record 1:");
+        
+        System.out.println(billing1);
+        
+        System.out.println("Record 2:");
+        
+        System.out.println(billing2);
+
+        System.out.println("Total due amount: Rs" + (billing1.getDueAmount() + billing2.getDueAmount()));
+    }
+}

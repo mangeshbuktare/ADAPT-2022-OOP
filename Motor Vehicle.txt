@@ -1,0 +1,49 @@
+abstract class MotorVehicle
+{
+    public String driveStatus;
+    public abstract String driveVehicle();
+    
+    public MotorVehicle()
+    {
+    this.driveStatus = "Preparing for drive";    
+    }
+    public String getDriveStatus()
+    {
+        return driveStatus;
+    }
+    void setDriveStatus(String driveStatus)
+    {
+        this.driveStatus = driveStatus;
+    }
+}
+class TwoWheeler extends MotorVehicle
+{   
+    @Override
+    public String driveVehicle()
+    {
+        return "You are driving two wheeler";
+    }
+}
+class FourWheeler extends MotorVehicle
+{   
+    @Override
+    public String driveVehicle()
+    {
+        return "You are driving four wheeler";
+    }
+}
+public class Source
+{
+    public static void main(String[] args)
+    {
+        TwoWheeler twoWheeler = new TwoWheeler();
+        System.out.println(twoWheeler.driveStatus);
+        String twoWheelerDrive = twoWheeler.driveVehicle();
+        System.out.println(twoWheelerDrive);
+        
+        FourWheeler fourWheeler = new FourWheeler();
+        System.out.println(fourWheeler.driveStatus);
+        String fourWheelerDrive = fourWheeler.driveVehicle();
+        System.out.println(fourWheelerDrive);
+    }
+}

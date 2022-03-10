@@ -1,0 +1,64 @@
+class Employee
+{
+    private String firstname;
+    private String lastname;
+    private int phonenumber;
+    
+    public Employee()
+    {
+        
+    }
+    
+    public Employee(String firstname, String lastname, int phonenumber)
+    {
+        this.firstname=firstname;
+        this.lastname=lastname;
+        this.phonenumber=phonenumber;
+    }
+    //
+    //getters
+    public String getFirstname()
+    {
+        return firstname;
+    }
+    public String getLastname()
+    {
+        return lastname;
+    }
+    public int getPhonenumber()
+    {
+        return phonenumber;
+    }
+    
+    //setters
+    void setFirstname(String firstname)
+    {
+        this.firstname=firstname;
+    }
+    void setLastname(String lastname)
+    {
+        this.lastname=lastname;
+    }
+    void setPhonenumber(int phonenumber)
+    {
+        this.phonenumber=phonenumber;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return ("Employee [firstname="+firstname+", lastname="+lastname+", phonenumber="+phonenumber+"]");
+    }
+}
+public class Source
+{
+    public static void main(String[] args)
+    {
+     Employee emp = new Employee();
+     
+     emp.setFirstname("Jay");
+     emp.setLastname("Kumar");
+     emp.setPhonenumber(77777);
+     System.out.print(emp);
+    }
+}
